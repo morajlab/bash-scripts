@@ -12,4 +12,5 @@
 # @exitcode 1 If target string doesn't exist
 str_exist() {
   grep -Fxq "$1" "$2"
+  echo $?
 }

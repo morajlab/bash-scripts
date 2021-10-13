@@ -11,4 +11,5 @@
 # @exitcode 1 If target app isn't installed
 is_installed() {
   command -v $1 &> /dev/null
+  echo $?
 }
