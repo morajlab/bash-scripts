@@ -1,13 +1,15 @@
 Describe "Test 'is_installed' module"
+  Include ./is_installed.sh
+
   It "Test 'bash' is installed"
-    alias bash_is_installed="./is_installed.sh bash"
-    When call eval bash_is_installed
-    The status should be success
+    alias is_installed_test="result=$(is_installed bash) & echo \$result"
+    When call eval is_installed_test
+    The output should eq 0
   End
 
   It "Test 'hjksdfjsdhf' is not installed"
-    alias hjksdfjsdhf_is_not_installed="./is_installed.sh hjksdfjsdhf"
-    When call eval hjksdfjsdhf_is_not_installed
-    The status should not be success
+    alias is_installed_test="result=$(is_installed hjksdfjsdhf) & echo \$result"
+    When call eval is_installed_test
+    The output should not eq 0
   End
 End
