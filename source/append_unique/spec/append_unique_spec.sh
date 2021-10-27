@@ -1,16 +1,22 @@
 Describe "Test 'append_unique' module"
   STR_EXIST_ROOT=$(pwd)/../../str_exist
+  text="This text is for test"
+  temp_file_path=""
 
   Include ./append_unique.sh
+
+  remove_temp_file() {
+    [ -f "$temp_file_path" ] && rm "$temp_file_path"
+  }
+
+  AfterEach "remove_temp_file"
 
   It "Create a new file and append data to it"
     append_unique_test() {
       temp_file_path=/tmp/$(uuidgen)
-      text="This text is for test"
 
       append_unique "$text" "$temp_file_path" && \
-      cat "$temp_file_path" && \
-      rm "$temp_file_path"
+      cat "$temp_file_path"
     }
 
     When call append_unique_test
@@ -21,12 +27,10 @@ Describe "Test 'append_unique' module"
   It "Execute same command twice"
     append_unique_test() {
       temp_file_path=$(mktemp)
-      text="This text is for test"
 
       append_unique "$text" "$temp_file_path" && \
       append_unique "$text" "$temp_file_path" && \
-      cat "$temp_file_path" && \
-      rm "$temp_file_path"
+      cat "$temp_file_path"
     }
 
     When call append_unique_test
