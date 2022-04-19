@@ -1,0 +1,3 @@
+[submodule "packages/rbsh"]
+	path = packages/rbsh
+	url = https://github.com/morajlab/rbsh.git
