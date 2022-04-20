@@ -1,0 +1,10 @@
+{
+  "name": "bash-scripts",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {},
+  "lint-staged": {
+    "**/*": "prettier -w -u",
+    "**/*.css": "stylelint"
+  }
+}
