@@ -1,10 +1,30 @@
 {
   "name": "bash-scripts",
-  "version": "0.0.0",
+  "version": "0.0.3-alpha",
+  "description": "A collection of useful bash scripts",
+  "private": true,
   "license": "MIT",
-  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morajlab/bash-scripts.git"
+  },
+  "keywords": [
+    "morajlab",
+    "moraj",
+    "bash-scripts",
+    "bash",
+    "script"
+  ],
+  "author": {
+    "name": "Morteza Jamali",
+    "email": "mortezajamali4241@gmail.com",
+    "url": "https://moraj.ir"
+  },
+  "bugs": {
+    "url": "https://github.com/morajlab/bash-scripts/issues"
+  },
+  "homepage": "https://github.com/morajlab/bash-scripts#readme",
   "lint-staged": {
-    "**/*": "prettier -w -u",
-    "**/*.css": "stylelint"
+    "**/*": "prettier -w -u"
   }
 }

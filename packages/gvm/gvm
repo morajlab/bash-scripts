@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+BIN_DIR=$(realpath $(dirname $(dirname $0)))
+
+binary=$BIN_DIR/$1
+
+if [ -f $binary ]; then
+	$binary ${*:2}
+else
+	echo "ERROR:: binary '$binary' doesn't exist."
+	exit 1
+fi
