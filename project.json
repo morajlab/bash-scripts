@@ -1,0 +1,6 @@
+{
+  "root": "packages/bash-scripts",
+  "sourceRoot": "packages/bash-scripts/packages",
+  "projectType": "library",
+  "tags": []
+}

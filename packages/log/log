@@ -7,19 +7,21 @@ PACKAGES_PATH=$(dirname $(realpath $(dirname $0)))
 alias color=$PACKAGES_PATH/color/color
 
 error() {
-  echo $(color bg red ' ERROR ' -e)\ $(color fg red "$1" -e)
+  echo $(color fb red black ' ERROR ' -e)\ $(color fg red "$1" -e)
 }
 
 warn() {
-  echo $(color bg yellow ' WARN ' -e)\ $(color fg yellow "$1" -e)
+  echo $(color fb yellow black ' WARN ' -e)\ $(color fg yellow "$1" -e)
 }
 
 success() {
-  echo $(color bg green ' SUCCESS ' -e)\ $(color fg green "$1" -e)
+  echo $(color fb green black ' SUCCESS ' -e)\ $(color fg green "$1" -e)
 }
 
 info() {
   echo $(color fb white black ' INFO ' -e)\ $(color fg white "$1" -e)
 }
 
+echo
 $1 "$2"
+echo

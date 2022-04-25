@@ -8,6 +8,12 @@ declare -A BG_COLORS=(
     ["BLUE"]="\u001b[44m"
     ["WHITE"]="\u001b[47m"
     ["BLACK"]="\u001b[40m"
+    ["BRED"]="\u001b[41;1m"
+    ["BGREEN"]="\u001b[42;1m"
+    ["BYELLOW"]="\u001b[43;1m"
+    ["BBLUE"]="\u001b[44;1m"
+    ["BWHITE"]="\u001b[47;1m"
+    ["BBLACK"]="\u001b[40;1m"
   )
 declare -A FG_COLORS=(
     ["RED"]="\u001b[31m"
@@ -16,6 +22,12 @@ declare -A FG_COLORS=(
     ["BLUE"]="\u001b[34m"
     ["WHITE"]="\u001b[37m"
     ["BLACK"]="\u001b[30m"
+    ["BRED"]="\u001b[31;1m"
+    ["BGREEN"]="\u001b[32;1m"
+    ["BYELLOW"]="\u001b[33;1m"
+    ["BBLUE"]="\u001b[34;1m"
+    ["BWHITE"]="\u001b[37;1m"
+    ["BBLACK"]="\u001b[30;1m"
   )
 
 color_bg() {
