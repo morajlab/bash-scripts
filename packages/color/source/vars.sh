@@ -29,21 +29,3 @@ declare -A FG_COLORS=(
     ["BWHITE"]="\u001b[37;1m"
     ["BBLACK"]="\u001b[30;1m"
   )
-
-color_bg() {
-  echo ${*:3} "${BG_COLORS[${1^^}]}$2$RESET"
-}
-
-color_fg() {
-  echo ${*:3} "${FG_COLORS[${1^^}]}$2$RESET"
-}
-
-color_fb() {
-  echo ${*:4} $(color_bg $1 "$(color_fg $2 "$3")")
-}
-
-if [[ $1 = 'fb' ]]; then
-  color_$1 $2 $3 "$4" ${*:5}
-else
-  color_$1 $2 "$3" ${*:4}
-fi

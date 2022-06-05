@@ -4,7 +4,7 @@ shopt -s expand_aliases
 
 PACKAGES_PATH=$(dirname $(realpath $(dirname $0)))
 
-alias color=$PACKAGES_PATH/color/color
+alias color=$PACKAGES_PATH/color/bin/color
 
 error() {
   echo $(color fb red black ' ERROR ' -e)\ $(color fg red "$1" -e)

@@ -1,0 +1,32 @@
+[bash-scripts]() > color
+
+---
+
+## Color
+
+---
+
+### Usage
+
+```bash
+color <fg|fb|bg> <color> ... <string> [arguments]
+```
+
+- `fg <color>` : Set foreground color
+- `fb <background color> <foreground color>` : Set foreground and background color
+- `bg <color>` : Set background color
+
+### Colors
+
+- `BLACK`
+- `BRED`
+- `BGREEN`
+- `BBLUE`
+- `BLUE`
+- `WHITE`
+- `YELLOW`
+- `BBLACK`
+- `RED`
+- `BWHITE`
+- `GREEN`
+- `BYELLOW`

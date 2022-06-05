@@ -7,7 +7,7 @@ shopt -s expand_aliases
 ROOT_PATH=$(dirname $(realpath $(dirname $0)))
 
 # Aliases
-alias color=$ROOT_PATH/color
+alias color=$ROOT_PATH/bin/color
 
 # Background colors test
 echo -e $(color bg red "Red background")
