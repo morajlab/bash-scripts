@@ -1,0 +1,47 @@
+#!/bin/bash
+# @file is_installed
+# @brief A bash script that checks whether the target app is installed or not
+
+# @example
+#   is_installed shell
+#
+# @arg $1 string app name
+#
+# @exitcode 0 If target app is installed
+# @exitcode 1 If target app isn't installed
+is_installed() {
+  local command_name=$1
+  local command_type=
+  local result=
+  local check_alias=0
+
+  shift
+
+  while [ "$#" -gt 0 ]; do
+    case "${1^^}" in
+      "--ALIAS" | "-A")
+        check_alias=1
+
+        shift
+      ;;
+      *)
+        shift
+      ;;
+    esac
+  done
+
+  command -v $command_name &> /dev/null  
+  result=$?
+
+  if [[ $check_alias = 1 ]]; then
+    command_type=$(type -t $command_name)
+
+    if [[ $command_type = 'alias' ]]; then
+      result=1
+    fi
+  fi
+
+  echo $result
+}
+
+is_installed $*
