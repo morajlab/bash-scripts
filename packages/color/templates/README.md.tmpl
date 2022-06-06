@@ -1,4 +1,4 @@
-[bash-scripts](../..) > color
+[bash-scripts](bash-scripts) > color
 
 ---
 
