@@ -1,10 +1,8 @@
-[bash-scripts]() > color
+[bash-scripts](../..) > color
 
 ---
 
 ## Color
-
----
 
 ### Usage
 

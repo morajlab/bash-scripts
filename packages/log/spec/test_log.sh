@@ -4,7 +4,7 @@ shopt -s expand_aliases
 
 ROOT_PATH=$(dirname $(realpath $(dirname $0)))
 
-alias log=$ROOT_PATH/log
+alias log=$ROOT_PATH/bin/log
 
 log error "This is a simple error message."
 log warn "This is a simple warn message."
