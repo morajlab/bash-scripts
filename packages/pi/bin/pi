@@ -7,9 +7,9 @@ PACKAGES_PATH=$(dirname $(dirname $(realpath $(dirname $0))))
 alias color=$PACKAGES_PATH/color/bin/color
 alias log=$PACKAGES_PATH/log/bin/log
 
-spinner_1()
+pi_1()
 {
-  local spinner="◼"
+  local element="◼"
   local color="bgreen"
 
   echo -ne '\015\033[2K'
@@ -28,7 +28,7 @@ spinner_1()
 
     for i in `seq 0 $(($2-1))`
     do
-      color fg $color $spinner -ne
+      color fg $color $element -ne
       sleep $1
     done
 
@@ -36,7 +36,7 @@ spinner_1()
   done
 }
 
-spinner_type="spinner_1"
+pi_type="pi_1"
 sleep_time=0.2
 length=5
 message=
@@ -45,11 +45,11 @@ args=()
 while [ "$#" -gt 0 ]; do
   case "${1^^}" in
     "--TYPE" | "-T")
-      if [[ $2 != "spinner_1" ]]; then
+      if [[ $2 != "pi_1" ]]; then
         log error "type '$2' is invalid."
       fi
 
-      spinner_type=$2
+      pi_type=$2
 
       shift
       shift
@@ -80,4 +80,4 @@ while [ "$#" -gt 0 ]; do
   esac
 done
 
-$spinner_type $sleep_time $length "$message" ${args[@]}
+$pi_type $sleep_time $length "$message" ${args[@]}

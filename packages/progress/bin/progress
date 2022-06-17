@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+shopt -s expand_aliases
+
+PACKAGES_PATH=$(dirname $(dirname $(realpath $(dirname $0))))
+pid=
+kill_command=
+
+alias pi=$PACKAGES_PATH/pi/bin/pi
+
+pi --message "$2" &
+pid=$!
+kill_command="kill -9 $pid &> /dev/null"
+
+trap "$kill_command" $(seq 0 15)
+($1)
+echo -ne '\015\033[2K'
+eval $kill_command
