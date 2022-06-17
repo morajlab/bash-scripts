@@ -12,6 +12,7 @@ spinner_1()
   local spinner="◼"
   local color="bgreen"
 
+  echo -ne '\015\033[2K'
   printf " %.0s" $(seq 0 $(($2-1)))
   echo -ne '  \033[s'
   echo -ne $3
