@@ -1,17 +1,21 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-ROOT_PATH=$(dirname $(realpath $(dirname $0)))
+npm i
 
-alias log=$ROOT_PATH/packages/log/log
+npx husky install
+
+# ROOT_PATH=$(dirname $(realpath $(dirname $0)))
+
+# alias log=$ROOT_PATH/packages/log/log
 
 # Install Shellspec
-if command -v shellspec >/dev/null 2>&1; then
-  log info "Shellspec is already installed"
-else
-  ( curl -fsSL https://git.io/shellspec | sh -s -- --yes ) && \
-  echo "export PATH=$HOME/.local/bin:\$PATH" >> ~/.bashrc && \
-  log success "Shellspec installed"
-fi
+# if command -v shellspec >/dev/null 2>&1; then
+#   log info "Shellspec is already installed"
+# else
+#   ( curl -fsSL https://git.io/shellspec | sh -s -- --yes ) && \
+#   echo "export PATH=$HOME/.local/bin:\$PATH" >> ~/.bashrc && \
+#   log success "Shellspec installed"
+# fi
 
 # if ! command -v gawk &> /dev/null; then
 #   sudo apt install gawk

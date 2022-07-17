@@ -4,11 +4,7 @@
   "description": "A collection of useful bash scripts",
   "private": true,
   "license": "MIT",
-  "scripts": {
-    "install": "./scripts/install.sh",
-    "test": "./scripts/test.sh",
-    "docs": "./scripts/document.sh"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/morajlab/bash-scripts.git"
@@ -31,5 +27,17 @@
   "homepage": "https://github.com/morajlab/bash-scripts#readme",
   "lint-staged": {
     "**/*": "prettier -w -u"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "@nrwl/cli": "14.4.3",
+    "@nrwl/js": "14.4.3",
+    "@nrwl/workspace": "14.4.3",
+    "nx": "14.4.3",
+    "prettier": "^2.6.2",
+    "typescript": "~4.7.2"
   }
 }
