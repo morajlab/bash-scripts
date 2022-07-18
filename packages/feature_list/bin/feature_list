@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+list_file=
+version_file=
+
+while [ "$#" -gt 0 ]; do
+  case "${1^^}" in
+    "--LIST-FILE" | "-L")
+      list_file=$2
+
+      shift
+      shift
+    ;;
+    "--VERSION-FILE" | "-V")
+      version_file=$2
+
+      shift
+      shift
+    ;;
+    *)
+      shift
+    ;;
+  esac
+done
+
+if [[ -z $list_file ]]; then
+  echo "ERROR:: option '--list-file' is missing"
+  exit 1
+fi
+
+if [[ ! -f $list_file ]]; then
+  echo "ERROR:: path '$list_file' is invalid"
+  exit 1
+fi
+
+if [ ! -z $version_file ] && [ ! -f $version_file ]; then
+  echo "ERROR:: path '$version_file' is invalid"
+  exit 1
+fi
+
+if [[ ! -z $version_file ]]; then
+  . $version_file
+fi
+
+while IFS= read -r feature; do
+  if [ ! -z $version_file ] && type -t "_$feature" &> /dev/null ; then
+    _$feature
+  else
+    $feature --version
+  fi
+done < $list_file
