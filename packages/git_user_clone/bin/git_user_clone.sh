@@ -2,6 +2,7 @@
 
 limit=30
 username=
+token=
 
 while [ "$#" -gt 0 ]; do
   case "${1^^}" in
@@ -12,6 +13,12 @@ while [ "$#" -gt 0 ]; do
     ;;
     "--USERNAME" | "-U")
       username=$2
+
+      shift
+      shift
+    ;;
+    "--TOKEN" | "-T")
+      token=$2
 
       shift
       shift
@@ -27,6 +34,14 @@ if [[ -z $username ]]; then
   exit 1
 fi
 
+if [[ -z $token ]]; then
+  echo "ERROR:: token is invalid !"
+  exit 1
+fi
+
+export GH_TOKEN=$token
+
 gh repo list "$username" --limit=$limit | while read -r repo _; do
-	gh repo clone "$repo" "$repo"
+  git clone "https://$token@github.com/$repo.git" 2> info.log 1> /dev/null && \
+  echo "INFO:: repository '$repo' cloned successfully."
 done
