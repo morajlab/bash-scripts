@@ -1,4 +1,4 @@
-[bash-scripts](bash-scripts) > is_installed
+[bash-scripts](../../../../) > is_installed
 
 ---
 

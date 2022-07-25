@@ -1,4 +1,4 @@
-[bash-scripts](../..) > log
+[bash-scripts](../../../../) > log
 
 ---
 
