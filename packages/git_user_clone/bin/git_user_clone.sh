@@ -3,6 +3,9 @@
 limit=30
 username=
 token=
+ignore_file="$(pwd)/.cloneignore"
+
+declare -A ignore_array
 
 while [ "$#" -gt 0 ]; do
   case "${1^^}" in
@@ -23,6 +26,17 @@ while [ "$#" -gt 0 ]; do
       shift
       shift
     ;;
+    "--IGNORE-FILE" | "-I")
+      if [[ ! -f $2 ]]; then
+        echo "ERROR:: path '$2' is invalid !"
+        exit 1
+      fi
+
+      ignore_file=$2
+
+      shift
+      shift
+    ;;
     *)
       shift
     ;;
@@ -39,9 +53,20 @@ if [[ -z $token ]]; then
   exit 1
 fi
 
+if [[ -f $ignore_file ]]; then
+  while IFS= read -r repo; do
+    ignore_array[$repo]="TRUE"
+  done < $ignore_file
+fi
+
 export GH_TOKEN=$token
 
 gh repo list "$username" --limit=$limit | while read -r repo _; do
-  git clone "https://$token@github.com/$repo.git" 2> info.log 1> /dev/null && \
-  echo "INFO:: repository '$repo' cloned successfully."
+  if [[ ${ignore_array[$repo]} = "TRUE" ]]; then
+    echo "INFO:: repository '$repo' skipped."
+    continue
+  fi
+
+  git clone "https://$token@github.com/$repo.git" 2> output.log 1> /dev/null && \
+  echo "SUCCESS:: repository '$repo' cloned."
 done
