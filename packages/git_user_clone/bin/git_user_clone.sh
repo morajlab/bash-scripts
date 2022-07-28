@@ -28,7 +28,7 @@ while [ "$#" -gt 0 ]; do
     ;;
     "--IGNORE-FILE" | "-I")
       if [[ ! -f $2 ]]; then
-        echo "ERROR:: path '$2' is invalid !"
+        echo ">>> ERROR:: path '$2' is invalid !"
         exit 1
       fi
 
@@ -44,12 +44,12 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [[ -z $username ]]; then
-  echo "ERROR:: username is invalid !"
+  echo ">>> ERROR:: username is invalid !"
   exit 1
 fi
 
 if [[ -z $token ]]; then
-  echo "ERROR:: token is invalid !"
+  echo ">>> ERROR:: token is invalid !"
   exit 1
 fi
 
@@ -63,10 +63,19 @@ export GH_TOKEN=$token
 
 gh repo list "$username" --limit=$limit | while read -r repo _; do
   if [[ ${ignore_array[$repo]} = "TRUE" ]]; then
-    echo "INFO:: repository '$repo' skipped."
+    echo ">>> INFO:: repository '$repo' skipped."
+    continue
+  fi
+
+  REPO_DIR_NAME=$(echo $repo | cut -d '/' -f 2)
+
+  if [[ -d $REPO_DIR_NAME ]]; then
+    (cd $REPO_DIR_NAME && \
+    git pull --all && \
+    echo ">>> SUCCESS:: repository '$repo' updated.")
     continue
   fi
 
   git clone "https://$token@github.com/$repo.git" 2> output.log 1> /dev/null && \
-  echo "SUCCESS:: repository '$repo' cloned."
+  echo ">>> SUCCESS:: repository '$repo' cloned."
 done
