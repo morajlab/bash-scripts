@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+color=$(bpm import color)
+
+placeholder=$($color fg bblack 'enter your name: ')
+placeholder=$($color fg green '*' -e)\ $(echo -e "\033[s$placeholder\033[u")
+
+read -p "$placeholder"
+
+echo $REPLY
