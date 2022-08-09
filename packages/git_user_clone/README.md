@@ -16,3 +16,5 @@ git_user_clone <--username|-u> [options]
 
 - `--username` or `-u` : **(Required)** Organization/Person username
 - `--no-limit` or `-n` : Clone all repositories
+- `--token` or `-t` : Token required for authentication
+- `--ignore-file` or `-i` : `.cloneignore` file path

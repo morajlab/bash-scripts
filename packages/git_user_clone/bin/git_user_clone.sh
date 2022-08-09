@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Import bash modules
+log=$(bpm import log)
+
 limit=30
 username=
 token=
@@ -28,7 +31,7 @@ while [ "$#" -gt 0 ]; do
     ;;
     "--IGNORE-FILE" | "-I")
       if [[ ! -f $2 ]]; then
-        echo ">>> ERROR:: path '$2' is invalid !"
+        $log error "path '$2' is invalid."
         exit 1
       fi
 
@@ -44,12 +47,12 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [[ -z $username ]]; then
-  echo ">>> ERROR:: username is invalid !"
+  $log error 'username is invalid.'
   exit 1
 fi
 
 if [[ -z $token ]]; then
-  echo ">>> ERROR:: token is invalid !"
+  $log error 'token is invalid.'
   exit 1
 fi
 
@@ -63,7 +66,7 @@ export GH_TOKEN=$token
 
 gh repo list "$username" --limit=$limit | while read -r repo _; do
   if [[ ${ignore_array[$repo]} = "TRUE" ]]; then
-    echo ">>> INFO:: repository '$repo' skipped."
+    $log info "repository '$repo' skipped."
     continue
   fi
 
@@ -72,10 +75,10 @@ gh repo list "$username" --limit=$limit | while read -r repo _; do
   if [[ -d $REPO_DIR_NAME ]]; then
     (cd $REPO_DIR_NAME && \
     git pull --all && \
-    echo ">>> SUCCESS:: repository '$repo' updated.")
+    $log success "repository '$repo' updated.")
     continue
   fi
 
   git clone "https://$token@github.com/$repo.git" 2> output.log 1> /dev/null && \
-  echo ">>> SUCCESS:: repository '$repo' cloned."
+  $log success "repository '$repo' cloned."
 done
