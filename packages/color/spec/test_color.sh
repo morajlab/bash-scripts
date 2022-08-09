@@ -29,3 +29,4 @@ echo
 
 # Forground and background test
 color fb yellow blue "Yellow background and blue forground" -e
+color fb yellow blue "This string has extra spaces at the end of line           " -e

@@ -1,22 +1,55 @@
 #!/usr/bin/env bash
 
+# Import bash modules
 color=$(bpm import color)
 
+FLAG_LENGTH=9
+
+# Private functions
+__justify_string() {
+  local text=" $1"
+  local space_count=$(($FLAG_LENGTH-${#1}-1))
+
+  for i in $(seq 1 $space_count); do
+    text+=" "
+  done
+
+  echo "$text"
+}
+
+# Public functions
 error() {
-  echo $($color fb red black ' ERROR ' -e)\ $($color fg red "$1" -e)
+  local FLAG="error"
+  local text=$($color fb red black "$(__justify_string ${FLAG^^})" -e)\ $($color fg red "$1" -e)
+
+  echo "$text"
 }
 
 warn() {
-  echo $($color fb yellow black ' WARN ' -e)\ $($color fg yellow "$1" -e)
+  local FLAG="warn"
+  local text=$($color fb yellow black "$(__justify_string ${FLAG^^})" -e)\ $($color fg yellow "$1" -e)
+
+  echo "$text"
 }
 
 success() {
-  echo $($color fb green black ' SUCCESS ' -e)\ $($color fg green "$1" -e)
+  local FLAG="success"
+  local text=$($color fb green black "$(__justify_string ${FLAG^^})" -e)\ $($color fg green "$1" -e)
+
+  echo "$text"
 }
 
 info() {
-  echo $($color fb white black ' INFO ' -e)\ $($color fg white "$1" -e)
+  local FLAG="info"
+  local text=$($color fb white black "$(__justify_string ${FLAG^^})" -e)\ $($color fg white "$1" -e)
+
+  echo "$text"
 }
+
+if [[ $1 = __* ]] || [ "$(type -t $1)" != 'function' ]; then
+  error "argument '$1' is invalid."
+  exit 1
+fi
 
 echo
 $1 "$2"
