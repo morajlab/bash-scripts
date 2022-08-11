@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# Import bash modules
+# log=$(bpm import log)
+
+REGEX='^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-((0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*)(\.(0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*))?(\+([0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*))?$'
+
+# Private functions
+__validate_version() {
+  if [[ $1 =~ $REGEX ]]; then
+    echo 0
+  else
+    echo 1
+  fi
+}
+
+if [[ $1 = __* ]]; then
+  echo ">>> ERROR  :argument '$1' is invalid."
+  exit 1
+fi
+
+if [[ $1 =~ ^v.+$ ]]; then
+  __validate_version "${1:1}"
+else
+  __validate_version "${1}"
+fi
