@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Import bash modules
+log=$(bpm import log)
+
 RESET="\u001b[0m"
 declare -A BG_COLORS=(
     ["RED"]="\u001b[41m"
@@ -44,6 +47,11 @@ color_fb() {
 
   echo ${*:4} "$text"
 }
+
+if [[ $1 = __* ]] || [ "$(type -t $1)" != 'function' ]; then
+  $log error "argument '$1' is invalid."
+  exit 1
+fi
 
 if [[ $1 = 'fb' ]]; then
   color_$1 $2 $3 "$4" ${*:5}
