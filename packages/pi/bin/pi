@@ -7,11 +7,18 @@ PACKAGES_PATH=$(dirname $(dirname $(realpath $(dirname $0))))
 alias color=$PACKAGES_PATH/color/bin/color
 alias log=$PACKAGES_PATH/log/bin/log
 
+__show_cursor() {
+  echo -e '\033[?25h'
+}
+
+trap '__show_cursor' EXIT
+
 pi_1()
 {
   local element="◼"
   local color="bgreen"
 
+  echo -ne '\033[?25l'
   echo -ne '\015\033[2K'
   printf " %.0s" $(seq 0 $(($2-1)))
   echo -ne '  \033[s'
@@ -45,10 +52,6 @@ args=()
 while [ "$#" -gt 0 ]; do
   case "${1^^}" in
     "--TYPE" | "-T")
-      if [[ $2 != "pi_1" ]]; then
-        log error "type '$2' is invalid."
-      fi
-
       pi_type=$2
 
       shift
@@ -79,5 +82,10 @@ while [ "$#" -gt 0 ]; do
     ;;
   esac
 done
+
+if [[ $pi_type = __* ]] || [ "$(type -t $pi_type)" != 'function' ]; then
+  log error "type '$pi_type' is invalid."
+  exit 1
+fi
 
 $pi_type $sleep_time $length "$message" ${args[@]}

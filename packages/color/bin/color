@@ -48,7 +48,7 @@ color_fb() {
   echo ${*:4} "$text"
 }
 
-if [[ $1 = __* ]] || [ "$(type -t $1)" != 'function' ]; then
+if [[ $1 = __* ]] || [ "$(type -t color_$1)" != 'function' ]; then
   $log error "argument '$1' is invalid."
   exit 1
 fi
